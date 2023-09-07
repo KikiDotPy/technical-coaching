@@ -37,3 +37,14 @@ test('greeter can greet with upper first case', () => {
 
     expect(greeting).toBe('Hello, Pallavi');
 });
+
+// `greet` returns `Good morning <name>` when the time is 06:00-12:00
+
+test('greet uses "Good morning" when the time is 06:00-12:00', () => {
+    const morningTime = new Date('2023-09-07T10:30:00')
+
+    const greeting = new Greeter(morningTime).greet('Marisa');
+
+    expect(greeting).toBe('Good morning, Marisa');
+});
+
