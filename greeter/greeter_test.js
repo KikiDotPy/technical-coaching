@@ -23,3 +23,10 @@ test('greeter can greet Marco in the morning', () => {
 
     expect(greeting).toBe('Good morning, Marco');
 });
+
+test('greeter can greet Marco without extra spaces', () => {
+
+    const greeting = new Greeter().greet('  Marco   ');
+
+    expect(greeting).toBe('Hello, Marco');
+});
