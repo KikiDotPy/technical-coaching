@@ -3,7 +3,17 @@
 class Greeter {
 
     greet(name) {
-        return `Hello, ${name.trim()}`
+        const finalName = this.sanitizeName(name)
+
+        return `Hello, ${finalName}`
+    }
+
+    sanitizeName(name) {
+        const trimmedName = name.trim()
+        const firstLetter = trimmedName[0].toUpperCase()
+        const restOfName = trimmedName.slice(1)
+
+        return firstLetter + restOfName
     }
 }
 

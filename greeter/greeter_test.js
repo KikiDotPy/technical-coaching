@@ -30,3 +30,10 @@ test('greeter can greet Marco without extra spaces', () => {
 
     expect(greeting).toBe('Hello, Marco');
 });
+
+test('greeter can greet with upper first case', () => {
+
+    const greeting = new Greeter().greet('pallavi');
+
+    expect(greeting).toBe('Hello, Pallavi');
+});
