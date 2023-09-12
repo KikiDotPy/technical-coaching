@@ -2,30 +2,29 @@
 
 const Greeter = require('./greeter.js')
 
+describe('greeter in the afternoon', () => {
+    let greeter;
 
-test('greeter can greet Marco in the morning', () => {
-    const thisMorning =  new Date('2023-09-05T11:00:00');
+    beforeEach(() => {
+        let afternoonTime = new Date('2023-09-05T14:00:00');
+        greeter = new Greeter(afternoonTime)
+    });
 
-    const greeting = new Greeter(thisMorning).greet('Marco');
+    // i nostri test
+    test('greets Marco without extra spaces', () => {
 
-    expect(greeting).toBe('Good morning, Marco');
+        const greeting = greeter.greet('  Marco   ');
+
+        expect(greeting).toBe('Hello, Marco');
+    });
+
+    test('greets with upper first case', () => {
+
+        const greeting = greeter.greet('pallavi');
+
+        expect(greeting).toBe('Hello, Pallavi');
+    });
 });
-
-test('greeter can greet Marco without extra spaces', () => {
-
-    const greeting = new Greeter().greet('  Marco   ');
-
-    expect(greeting).toBe('Hello, Marco');
-});
-
-test('greeter can greet with upper first case', () => {
-
-    const greeting = new Greeter().greet('pallavi');
-
-    expect(greeting).toBe('Hello, Pallavi');
-});
-
-// `greet` returns `Good morning <name>` when the time is 06:00-12:00
 
 test('greet uses "Good morning" when the time is 06:00-12:00', () => {
     const morningTime = new Date('2023-09-07T10:30:00')
