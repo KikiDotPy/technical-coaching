@@ -1,8 +1,20 @@
 'use strict';
 
+function isMorningHour(currentHours) {
+    return currentHours >= 6 && currentHours < 12;
+}
+
+function isAfternoonHour(currentHours) {
+    return currentHours >= 18 && currentHours < 22;
+}
+
+function isNightHour(currentHours) {
+    return currentHours >= 22 || currentHours < 6;
+}
+
 class Greeter {
     constructor(date = new Date()) {
-        this.date= date;
+        this.date = date;
     }
 
     greet(name) {
@@ -23,8 +35,14 @@ class Greeter {
     getSalutation() {
         const currentHours = this.date.getHours()
 
-        if (currentHours >= 6 && currentHours < 12){
+        if (isMorningHour(currentHours)) {
             return 'Good morning'
+        }
+        if (isAfternoonHour(currentHours)) {
+            return 'Good evening'
+        }
+        if (isNightHour(currentHours)) {
+            return 'Good night'
         }
 
         return 'Hello'
