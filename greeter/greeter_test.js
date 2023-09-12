@@ -35,3 +35,11 @@ test('greet uses "Good morning" when the time is 06:00-12:00', () => {
     expect(greeting).toBe('Good morning, Marisa');
 });
 
+test('greet uses "Hello" after lunch', () => {
+    const morningTime = new Date('2023-09-07T12:30:00')
+
+    const greeting = new Greeter(morningTime).greet('Marisa');
+
+    expect(greeting).toBe('Hello, Marisa');
+});
+

@@ -21,10 +21,12 @@ class Greeter {
     }
 
     getSalutation() {
-        const currentTime = this.date.getHours()
-        if (currentTime >= 6 && currentTime <= 12){
+        const currentHours = this.date.getHours()
+
+        if (currentHours >= 6 && currentHours < 12){
             return 'Good morning'
         }
+
         return 'Hello'
     }
 }
