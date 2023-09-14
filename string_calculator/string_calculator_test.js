@@ -23,7 +23,6 @@ describe('StringCalculator', () => {
         expect(addResult).toBe(2);
     });
 
-    // Two numbers, comma delimited, returns the sum `'1,2' => 3` `'10,20' => 30`
     test('when given two strings "1" and "2" comma-separated, returns their sum 3', () => {
         const addResult = stringCalculator.add('1,2')
 
@@ -36,4 +35,15 @@ describe('StringCalculator', () => {
         expect(addResult).toBe(30);
     });
 
+    test('when given two strings "1" and "2" on two different lines, returns their sum 3', () => {
+        const addResult = stringCalculator.add('1\n2')
+
+        expect(addResult).toBe(3);
+    });
+
+    test('can sum tokens separated with comma or new line', () => {
+        const addResult = stringCalculator.add('1\n2,3\n4')
+
+        expect(addResult).toBe(10);
+    });
 })
