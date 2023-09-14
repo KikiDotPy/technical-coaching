@@ -2,10 +2,11 @@
 
 class StringCalculator {
     add(string) {
-        if (string === '') {
-            return 0;
-        }
-        return Number(string);
+        const numbersStrings = string.split(',')
+        const numbers = numbersStrings.map(s => Number(s));
+        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        return sum;
     }
 }
 

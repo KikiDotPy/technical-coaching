@@ -2,28 +2,38 @@
 
 const StringCalculator = require('./string_calculator.js')
 
-test('StringCalculator return 0 when a string is empty', () => {
+describe('StringCalculator', () => {
     const stringCalculator = new StringCalculator();
 
-    const addResult = stringCalculator.add('')
+    test('returns 0 when a string is empty', () => {
+        const addResult = stringCalculator.add('')
 
-    expect(addResult).toBe(0);
-});
+        expect(addResult).toBe(0);
+    });
 
-// A single number returns the value `'1' => 1` `'2' => 2`
+    test('when given string "1", returns its value', () => {
+        const addResult = stringCalculator.add('1')
 
-test('StringCalculator when given string "1", returns its value', () => {
-    const stringCalculator = new StringCalculator();
+        expect(addResult).toBe(1);
+    });
 
-    const addResult = stringCalculator.add('1')
+    test('when given string "2", returns its value', () => {
+        const addResult = stringCalculator.add('2')
 
-    expect(addResult).toBe(1);
-});
+        expect(addResult).toBe(2);
+    });
 
-test('StringCalculator when given string "2", returns its value', () => {
-    const stringCalculator = new StringCalculator();
+    // Two numbers, comma delimited, returns the sum `'1,2' => 3` `'10,20' => 30`
+    test('when given two strings "1" and "2" comma-separated, returns their sum 3', () => {
+        const addResult = stringCalculator.add('1,2')
 
-    const addResult = stringCalculator.add('2')
+        expect(addResult).toBe(3);
+    });
 
-    expect(addResult).toBe(2);
-});
+    test('when given two strings "10" and "20" comma-separated, returns their sum 30', () => {
+        const addResult = stringCalculator.add('10,20')
+
+        expect(addResult).toBe(30);
+    });
+
+})
