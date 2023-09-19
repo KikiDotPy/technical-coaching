@@ -65,4 +65,34 @@ describe('StringCalculator', () => {
         expect(addResult).toBe(2);
     });
 
+    // test('should complain about non numbers', () => {
+    //     expect(() => stringCalculator.add('2,c,6'))
+    //         .toThrow('Not a number: c')
+    // });
+    //
+    test('accepts split character at the beginning of input', () => {
+        const addResult = stringCalculator.add('//#\n1#2')
+
+        expect(addResult).toBe(3);
+    });
+
+    test('accepts split characters at the beginning of input', () => {
+        const addResult = stringCalculator.add('//###\n5###7')
+
+        expect(addResult).toBe(12);
+    });
+
+    test('accepts split characters at the beginning of input', () => {
+        const addResult = stringCalculator.add('//#jk\n32#jk15')
+
+        expect(addResult).toBe(47);
+    });
 })
+
+test('pippo!', () => {
+    const string = '//123\n567\nbla'
+    const i = string.indexOf('\n');
+    const result = string.substring(2, i)
+
+    expect(result).toBe('123');
+});

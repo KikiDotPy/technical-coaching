@@ -8,13 +8,13 @@ class StringCalculator {
             .map(s => Number(s))
             .filter(num => num < 1000);
 
-        this.checkNoneNegatives(numbers);
+        this.checkNoNegatives(numbers);
 
         const sumAccumulator = (tot, item) => tot + item;
         return numbers.reduce(sumAccumulator, 0);
     }
 
-    checkNoneNegatives(numbers) {
+    checkNoNegatives(numbers) {
         const negatives = numbers.filter(num => num < 0);
 
         if (negatives.length > 0) {
@@ -23,7 +23,13 @@ class StringCalculator {
     }
 
     tokenize(string) {
-        let numbersStrings = string.split(',')
+        let delimiter = ','
+        if (string.startsWith('//')){
+            const indexOfNewLine = string.indexOf('\n');
+            delimiter = string.substring(2, indexOfNewLine);
+        }
+
+        let numbersStrings = string.split(delimiter)
         let finalArray = []
 
         for (let i = 0; i < numbersStrings.length; i++) {
