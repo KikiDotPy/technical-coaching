@@ -6,7 +6,11 @@ class StringCalculator {
 
         const numbers = numbersStrings.map(s => Number(s));
         // la reduce non esiste cosa facciamo?
-        const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        let sum = 0;
+        for (let i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+        }
+        // const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
         return sum;
     }
