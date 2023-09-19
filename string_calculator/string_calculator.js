@@ -4,15 +4,22 @@ class StringCalculator {
     add(string) {
         let numbersStrings = this.tokenize(string);
 
-        const numbers = numbersStrings.map(s => Number(s));
-        // la reduce non esiste cosa facciamo?
-        let sum = 0;
-        for (let i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
-        }
-        // const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        const numbers = numbersStrings
+            .map(s => Number(s))
+            .filter(num => num < 1000);
 
-        return sum;
+        this.checkNoneNegatives(numbers);
+
+        const sumAccumulator = (tot, item) => tot + item;
+        return numbers.reduce(sumAccumulator, 0);
+    }
+
+    checkNoneNegatives(numbers) {
+        const negatives = numbers.filter(num => num < 0);
+
+        if (negatives.length > 0) {
+            throw `negatives not allowed: ${negatives.join(',')}`
+        }
     }
 
     tokenize(string) {
