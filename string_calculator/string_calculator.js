@@ -27,6 +27,7 @@ class StringCalculator {
         if (string.startsWith('//')){
             const indexOfNewLine = string.indexOf('\n');
             delimiter = string.substring(2, indexOfNewLine);
+            string = string.substring(indexOfNewLine + 1)
         }
 
         let numbersStrings = string.split(delimiter)

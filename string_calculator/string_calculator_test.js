@@ -88,11 +88,3 @@ describe('StringCalculator', () => {
         expect(addResult).toBe(47);
     });
 })
-
-test('pippo!', () => {
-    const string = '//123\n567\nbla'
-    const i = string.indexOf('\n');
-    const result = string.substring(2, i)
-
-    expect(result).toBe('123');
-});
