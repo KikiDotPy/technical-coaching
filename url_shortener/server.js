@@ -1,62 +1,61 @@
 const http = require('http');
-const GreetController = require('./greet_feature.js');
 const hostname = '127.0.0.1';
 const port = 8080;
 
-const server = http.createServer((req, res) => {
-    console.log(req.url);
-    parsePayload(req, payload => {
-        const controller = findController(req);
-        const query = parseQueryString(req);
+const server = http.createServer(async (req, res) => {
+    const payload = await parsePayload(req)
+    const query = parseQueryString(req);
+    const controller = findController(req);
+    console.log("url:", req.url, "\tquery:", query, "\tpayload:", payload);
 
-        const {statusCode, body} = controller.handle(req.url, query, payload);
+    const {statusCode, body} = controller.respondTo(req.url, query, payload);
 
-        res.setHeader('Content-Type', 'application/json');
-        res.statusCode = statusCode;
-        res.end(JSON.stringify(body));
-    });
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = statusCode;
+    res.end(JSON.stringify(body));
 });
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
+const GreetController = require('./greet_controller.js');
+
 function findController(req) {
     if (req.url.startsWith('/greet')) {
-        return greetController;
+        return new GreetController();
     } else {
-        return notFoundController;
+        return new NotFoundController();
     }
 }
 
 class NotFoundController {
-    handle(url, query, payload) {
+    respondTo(url, query, payload) {
         const body = {message: "Not found"};
         return {statusCode: 404, body: body}
     }
 }
-const notFoundController = new NotFoundController();
-
-const greetController = new GreetController();
 
 function parseQueryString(req) {
     const parsed_url = new URL(req.url, `http://${hostname}:${port}`);
     return Object.fromEntries(parsed_url.searchParams);
 }
 
-function parsePayload(req, onSuccess) {
-    if (req.method !== 'POST') {
-        onSuccess({});
-        return;
-    }
+function parsePayload(req) {
+    return new Promise((resolve) => {
+        if (req.method !== 'POST') {
+            resolve({});
+            return;
+        }
 
-    let requestBody = [];
-    req.on('data', (chunks)=>{
-        requestBody.push(chunks);
-    });
+        let requestBody = [];
+        req.on('data', (chunks) => {
+            requestBody.push(chunks);
+        });
 
-    req.on('end', ()=>{
-        onSuccess(Buffer.concat(requestBody).toString());
-    });
+        req.on('end', () => {
+            resolve(Buffer.concat(requestBody).toString());
+        });
+    })
 }
 
