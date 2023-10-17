@@ -1,6 +1,11 @@
 const GreetController = require('./greet_controller.js');
 
-test('tests work', () => {
-    expect(0).toBe(1);
+test('greet_controller respond with the message "Hello, World!"', () => {
+    const controller = new GreetController();
+
+    const {statusCode, body} = controller.respondTo('', {}, {});
+
+    expect(statusCode).toBe(200);
+    expect(body).toEqual({"message": "Hello, world!"})
 });
 
