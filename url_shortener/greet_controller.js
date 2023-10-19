@@ -1,7 +1,9 @@
 
 class GreetController {
     respondTo(url, query, payload) {
-        const body = {message: `Hello, world!`};
+        const name = query.name || 'world'
+
+        let body = {message: `Hello, ${name}!`};
         return {statusCode: 200, body: body};
     }
 }

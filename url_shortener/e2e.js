@@ -1,4 +1,4 @@
-#!/usr/bin/env jest --verbose --testRegex e2e.js
+#!/usr/bin/env jest --verbose --silent=false --testRegex e2e.js
 
 const fetch = require('node-fetch');
 
@@ -35,7 +35,7 @@ test('hello, world', async () => {
     expect(body.message).toBe("Hello, world!");
 });
 
-xtest('hello, <name>', async () => {
+test('hello, <name>', async () => {
     const [status, body] = await getJSON(`${BASE_URL}/greet?name=Bob`);
 
     expect(status).toBe(200);
